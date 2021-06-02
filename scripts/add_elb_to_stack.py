@@ -1,11 +1,8 @@
-from datetime import datetime
 import sys
 
 import boto3
-import botocore
 
-from yaml import load, dump
-from yaml import Loader, Dumper
+from yaml import dump, Dumper
 
 
 def get_certificate_arn() -> str:
@@ -72,7 +69,16 @@ def main(stack_name, stack_template, vpc_id, sg_name):
             },
         ],
     )
-    print(response)
+    print(dump(response, Dumper=Dumper))
+
+    response = cf.execute_change_set(
+        ChangeSetName='update-with-elb',
+        StackName=stack_name,
+    )
+    print(dump(response, Dumper=Dumper))
+    waiter = cf.get_waiter(stack_name)
+    print("...waiting for stack to update...")
+    waiter.wait(StackName=stack_name)
 
 
 if __name__ == "__main__":
