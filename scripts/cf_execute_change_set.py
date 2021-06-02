@@ -4,7 +4,7 @@ import boto3
 from yaml import dump, Dumper
 
 
-def _wait(change_set_name, stack_name, retry=3, wait_time=15):
+def _wait(stack_name, change_set_name, retry=3, wait_time=15):
     cf = boto3.client('cloudformation', region_name='us-east-2')
     print("...waiting for change set create complete...")
     for x in range(retry):
