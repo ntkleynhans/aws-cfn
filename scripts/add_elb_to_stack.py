@@ -42,7 +42,7 @@ def main(stack_name, stack_template, vpc_id, sg_name):
 
     cf = boto3.client('cloudformation', region_name='us-east-2')
     response = cf.create_change_set(
-        ChangeStepName='update-with-elb',
+        ChangeSetName='update-with-elb',
         StackName=stack_name,
         TemplateBody=template,
         Parameters=[
