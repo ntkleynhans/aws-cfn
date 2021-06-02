@@ -70,17 +70,17 @@ def main(stack_name, stack_template, vpc_id, sg_name):
         ],
     )
     print(dump(response, Dumper=Dumper))
-    waiter = cf.get_waiter(stack_name)
-    print("...waiting for stack to change set creation...")
-    waiter.wait(StackName=stack_name)
+    waiter = cf.get_waiter('change_set_create_complete')
+    print("...waiting for change set creation...")
+    waiter.wait(ChangeSetName='update-with-elb')
 
     response = cf.execute_change_set(
         ChangeSetName='update-with-elb',
         StackName=stack_name,
     )
     print(dump(response, Dumper=Dumper))
-    waiter = cf.get_waiter(stack_name)
-    print("...waiting for stack to update change set...")
+    waiter = cf.get_waiter('stack_update_complete')
+    print("...waiting for stack to update...")
     waiter.wait(StackName=stack_name)
 
 
