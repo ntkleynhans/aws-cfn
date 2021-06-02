@@ -49,14 +49,24 @@ def main(stack_name, stack_template, vpc_id, sg_name):
             {
                 'ParameterKey': 'VPC',
                 'ParameterValue': vpc_id,
+            },
+            {
                 'ParameterKey': 'SubnetA',
                 'ParameterValue': subnets[0],
+            },
+            {
                 'ParameterKey': 'SubnetB',
                 'ParameterValue': subnets[1],
+            },
+            {
                 'ParameterKey': 'SubnetC',
                 'ParameterValue': subnets[2],
+            },
+            {
                 'ParameterKey': 'SecurityGroup',
                 'ParameterValue': sg,
+            },
+            {
                 'ParameterKey': 'CertificateArn',
                 'ParameterValue': cert_arn,
             },
