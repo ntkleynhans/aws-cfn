@@ -40,7 +40,7 @@ def main(stack_name, stack_template, vpc_id, sg_name):
     sg = get_security_group(vpc_id, sg_name)
     template = _parse_template(stack_template)
 
-    cf = boto3.client('cloudformation')
+    cf = boto3.client('cloudformation', region_name='us-east-2')
     response = cf.create_change_set(
         StackName=stack_name,
         TemplateBody=template,
