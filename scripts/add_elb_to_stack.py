@@ -18,12 +18,20 @@ def get_subnets(vpc_id) -> list:
     vpc = ec2.Vpc(vpc_id)
     return [sub.id for sub in vpc.subnets.all()]
 
+def get_security_group(vpc_id, sg_name) -> str:
+    ec2 = boto3.resource('ec2', region_name='us-east-2')
+    vpc = ec2.Vpc(vpc_id)
+    return [sg.id for sg in vpc.security_groups.filter(GroupNames=[sg_name,])]
 
-def main(vpc_id):
+
+
+def main(vpc_id, sg_name):
     cert_arn = get_certificate_arn()
     subnets = get_subnets(vpc_id)
+    sg = get_security_group(vpc_id, sg_name)
     print(cert_arn)
     print(subnets)
+    print(sg)
 
 
 if __name__ == "__main__":

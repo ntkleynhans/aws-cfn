@@ -27,7 +27,7 @@ Parameters:
         Description: Security Group name
         Type: String
 
-    CertificateArn
+    CertificateArn:
         Description: SSL Certificate Arn
         Type: String
 
